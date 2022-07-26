@@ -1,3 +1,59 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-header>
+    <ion-toolbar color="white">
+      <ion-title>
+        <a class="clickable">
+          <img src="assets/img/logo.jpg" />
+        </a>
+      </ion-title>
+
+      <ion-buttons slot="end">
+        <ion-menu-button auto-hide="false"></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-menu side="end" menuId="first" contentId="main">
+    <ion-toolbar color="white"></ion-toolbar>
+    <ion-content>
+      <ion-accordion-group>
+        <ion-accordion>
+          <ion-item slot="header" color="light">
+            <ion-label>Home</ion-label>
+          </ion-item>
+        </ion-accordion>
+      </ion-accordion-group>
+      <ion-accordion-group>
+        <ion-accordion>
+          <ion-item slot="header" color="light">
+            <ion-label>Connexion</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content" routerLink="/login/patient">Patient</div>
+          <div class="ion-padding" slot="content" routerLink="/login/vaccinodrome">Vaccinodrome</div>
+          <div class="ion-padding" slot="content" routerLink="/login/admin">Admin</div>
+        </ion-accordion>
+      </ion-accordion-group>
+      <ion-accordion-group>
+        <ion-accordion>
+          <ion-item slot="header" color="light">
+            <ion-label>Inscription</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content" >Patient</div>
+          <div class="ion-padding" slot="content">Vaccinodrome</div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
+
+  <ion-content [scrollEvents]="true">
+    <ion-router-outlet></ion-router-outlet>
+  </ion-content>
+
+  <ion-footer>
+    <div class="div_footer">
+      <span> &copy; RDVVaksiny, All Right Reserved. </span>
+      <span> Copyright 2022 </span>
+    </div>
+  </ion-footer>
 </ion-app>
