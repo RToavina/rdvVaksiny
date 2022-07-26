@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UtileService } from '../shared/services/utile.service';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../shared/services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +15,9 @@ export class LoginComponent implements OnInit {
   mdp: string;
 
   constructor(
-    private utileService: UtileService,
-    private fb: FormBuilder
+    private authService: AuthenticationService,
+    private fb: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -35,8 +37,9 @@ export class LoginComponent implements OnInit {
 
   connect() {
     if (this.form.valid) {
-      this.utileService.login(this.getFormtoModel()).subscribe(res => {
-        console.log(res);
+      this.authService.login(this.getFormtoModel()).subscribe(() => {
+        console.log("User is logged in");
+        this.router.navigateByUrl('/home');
       });
     }
   }
