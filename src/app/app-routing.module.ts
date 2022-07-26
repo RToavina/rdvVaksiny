@@ -5,16 +5,9 @@ import { InscriptionComponent } from './inscription/inscription.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'login', redirectTo: 'login/patient', pathMatch: 'full' },
-  {
-    path: 'login/patient',
-    component: LoginComponent,
-    data: { type: 'Patient' },
-  },
-  { path: 'login/admin', component: LoginComponent, data: { type: 'Admin' } },
-  { path: 'login/vaccinodrome', component: LoginComponent, data: { type: 'Vaccinodrome' } },
+  { path: 'login', component: LoginComponent },
   { path: 'inscription', component: InscriptionComponent },
 ];
 @NgModule({
