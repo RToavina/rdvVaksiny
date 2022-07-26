@@ -8,15 +8,15 @@ import { RegionService } from '../shared/services/region.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  
+
   regions: Region[] = [];
 
   constructor(private regionService: RegionService) { }
- 
-  ngOnInit() { 
-      this.regionService.getRegions().subscribe(res =>{
-        this.regions = res.docs;
-      });
+
+  ngOnInit() {
+    /*       this.regionService.getRegions().subscribe(res =>{
+            this.regions = res.docs;
+          }); */
   }
 
   ngOnDestroy(): void {

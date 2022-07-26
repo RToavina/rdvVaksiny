@@ -7,8 +7,8 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule, HttpClientModule
-
+    CommonModule, 
+    HttpClientModule,
   ]
 })
 export class SharedModule { }

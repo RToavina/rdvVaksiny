@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8010/rdvvaksiny',
+  apiMongo: 'http://localhost:8010/rdvvaksiny',
+  apiJava: 'http://localhost:8087/rdvvaksiny'
 };
 
 /*
