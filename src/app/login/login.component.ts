@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   getFormtoModel() {
     return {
       telephone: this.form.get('login').value,
-      mot_de_passe: this.form.get('login').value,
+      mot_de_passe: this.form.get('password').value,
       status: 100
     }
   }
