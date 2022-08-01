@@ -7,7 +7,7 @@ import {AuthGuard} from './shared/services/auth.guard';
 import {SplashComponent} from './splash/splash.component';
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'inscription', component: InscriptionComponent},
   {

@@ -29,7 +29,7 @@ export class AuthenticationService {
 
   private setSession(response: Response) {
     localStorage.setItem('token', response.token);
-    localStorage.setItem('auth', this.jwtDecode.getDecodedAccessToken(response.token));
+    localStorage.setItem('auth', JSON.stringify(this.jwtDecode.getDecodedAccessToken(response.token)));
   }
 
   logout() {
