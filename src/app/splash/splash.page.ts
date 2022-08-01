@@ -10,7 +10,7 @@ import { SplashService } from '../shared/services/splash.service';
 export class SplashPage implements OnInit {
   constructor(public router: Router,private splashService:SplashService) {
     setTimeout(() => {
-      this.router.navigateByUrl('home');
+      this.router.navigateByUrl('inscription');
       this.splashService.showSplash = false;
     }, 3000);
   }
