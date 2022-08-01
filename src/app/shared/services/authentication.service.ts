@@ -36,13 +36,13 @@ export class AuthenticationService {
   }
 
   getToken() {
-    return localStorage.getItem("id_token");
+    return localStorage.getItem("token");
   }
 
   getUser() {
     const token = this.getToken();
-    this.userConnected = this.jwtDecode.getDecodedAccessToken(token);
-    console.log(this.userConnected);
+    const user = this.jwtDecode.getDecodedAccessToken(token);
+    console.log(user);
   }
 
 }

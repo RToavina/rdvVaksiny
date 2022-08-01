@@ -1,5 +1,5 @@
 export class User {
-  codeutilisateur: number;
+  iss: string;
   nom: string;
   email: string;
   expiration: Date;
