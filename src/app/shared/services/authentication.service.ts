@@ -40,11 +40,11 @@ export class AuthenticationService {
     return localStorage.getItem("token");
   }
 
-  get isAuth() {
+  isAuth() {
     const auth = localStorage.getItem("auth");
     const info = new Auth(JSON.parse(auth));
     const now = new Date();
-    return now.getTime() > info.expiration;
+    return now.getTime() < (new Date(info.expiration)).getTime();
   }
 
 }
