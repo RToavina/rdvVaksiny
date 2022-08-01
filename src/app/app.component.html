@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-header>
+  <ion-header *ngIf="!showSplash">
     <ion-toolbar color="white">
       <ion-title>
         <a class="clickable">
@@ -50,7 +50,7 @@
     <ion-router-outlet></ion-router-outlet>
   </ion-content>
 
-  <ion-footer>
+  <ion-footer *ngIf="!showSplash">
     <div class="div_footer">
       <span> &copy; RDVVaksiny, All Right Reserved. </span>
       <span> Copyright 2022 </span>

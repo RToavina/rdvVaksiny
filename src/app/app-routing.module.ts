@@ -6,10 +6,14 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './shared/services/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'inscription', component: InscriptionComponent },
+  {
+    path: 'splash',
+    loadChildren: () =>
+      import('./splash/splash.module').then((m) => m.SplashPageModule),
+  },
 ];
 @NgModule({
   imports: [
@@ -17,4 +21,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

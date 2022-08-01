@@ -18,7 +18,8 @@ export class AuthenticationService {
 
   login(login: Login) {
     return this.http.post(this.urlLogin, login).pipe(tap(res => {
-      this.isConnected = true;
+      /*this.isConnected = true;*/
+      console.log(res);
     }));
   }
 }
