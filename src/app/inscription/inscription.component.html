@@ -1,3 +1,46 @@
-<p>
-  inscription works!
-</p>
+<ion-content>
+  <form [formGroup]="form">
+    <h1>RDV Vaksiny</h1>
+    <h2>Inscription patient</h2>
+    <label>Veuillez remplir le formulaire ci-dessous:</label>
+
+    <ion-item>
+      <ion-label position="floating">Nom</ion-label>
+      <ion-input formControlName="nom"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Prénoms</ion-label>
+      <ion-input formControlName="prenom"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Date de naissance</ion-label>
+      <ion-input formControlName="dateDeNaissance" type="bday"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Telephone</ion-label>
+      <ion-input formControlName="telephone" type="tel"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Mot de passe</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Confirmer mot de passe</ion-label>
+      <ion-input type="password" formControlName="passwordConfirm"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" (click) ="inscription()" >S'inscrire</ion-button>
+
+
+  </form>
+</ion-content>
