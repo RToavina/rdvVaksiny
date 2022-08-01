@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { UtileService } from '../service/utile.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../shared/services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -8,59 +9,39 @@ import { UtileService } from '../service/utile.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  form: FormGroup;
+
   telephone: string;
   mdp: string;
 
   constructor(
-    private utileService: UtileService,
-    private httpClient: HttpClient
-  ) {}
+    private authService: AuthenticationService,
+    private fb: FormBuilder,
+    private router: Router
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.form = this.fb.group({
+      login: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
-  setDataLogin(isMdp: boolean, value: string) {
-    if (isMdp) {
-      this.mdp = value;
-    } else {
-      this.telephone = value;
+  getFormtoModel() {
+    return {
+      telephone: this.form.get('login').value,
+      mot_de_passe: this.form.get('password').value,
+      status: 100
     }
   }
 
-  connexionPatient() {
-    if (
-      this.utileService.getVerifString(this.telephone) &&
-      this.utileService.getVerifString(this.mdp)
-    ) {
-      let data = {
-        telephone: this.telephone,
-        mot_de_passe: this.mdp,
-        status: 100,
-      };
-
-      let url = this.utileService.getUrlServeur() + '/utilisateur/login-utilisateur';
-
-      let headers = {
-        'Content-Type': 'application/json',
-        'Accept' : 'application/json',
-        'Access-Control-Allow-Origin': ''+ url,
-      };
-
-      this.httpClient
-        .post(
-          url,
-          data,
-          { headers: headers }
-        )
-        .subscribe(
-          (data) => {
-            console.log(data);
-          },
-          (error) => {
-            console.log('Error' + error);
-          }
-        );
-    } else {
-      alert('Il y a un champs vide.');
+  connect() {
+    if (this.form.valid) {
+      this.authService.login(this.getFormtoModel()).subscribe(() => {
+        console.log("User is logged in");
+        this.router.navigateByUrl('/home');
+      });
     }
   }
+
 }

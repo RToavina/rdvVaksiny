@@ -8,7 +8,7 @@ import { PaginatedRegion, Region } from '../model/region';
 })
 export class RegionService {
 
-  url = environment.apiUrl;
+  url = environment.apiMongo;
   constructor(private http: HttpClient) { }
 
   getRegions() {
