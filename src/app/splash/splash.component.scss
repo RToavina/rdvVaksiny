@@ -1,12 +1,16 @@
 ion-content{
-    --background:white;
+  --background:white;
 }
 
 @-webkit-keyframes rotate-center{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes rotate-center{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}
-.container{
-    img{
-        -webkit-animation:rotate-center 2s ease-in-out both;animation:rotate-center 2s ease-in-out both;
-        height: 100px;
-        margin-top: 35%;
-    }
+.logo{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
+  img{
+    -webkit-animation:rotate-center 2s ease-in-out both;animation:rotate-center 2s ease-in-out both;
+  }
 }

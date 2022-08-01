@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthenticationService } from '../shared/services/authentication.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '../shared/services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +9,7 @@ import { AuthenticationService } from '../shared/services/authentication.service
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  readonly STATUS = 100;
   form: FormGroup;
 
   telephone: string;
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthenticationService,
     private fb: FormBuilder,
     private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -31,15 +33,17 @@ export class LoginComponent implements OnInit {
     return {
       telephone: this.form.get('login').value,
       mot_de_passe: this.form.get('password').value,
-      status: 100
-    }
+      status: this.STATUS
+    };
   }
 
   connect() {
     if (this.form.valid) {
-      this.authService.login(this.getFormtoModel()).subscribe(() => {
-        console.log("User is logged in");
-        this.router.navigateByUrl('/home');
+      this.authService.login(this.getFormtoModel()).subscribe( res => {
+        if (res.status === 200) {
+          console.log("User is logged in");
+          this.router.navigateByUrl('/home');
+        }
       });
     }
   }
