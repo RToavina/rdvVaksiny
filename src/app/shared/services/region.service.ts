@@ -12,6 +12,6 @@ export class RegionService {
   constructor(private http: HttpClient) { }
 
   getRegions() {
-      return this.http.get<PaginatedRegion>(this.url+'/regions')
+      return this.http.get<PaginatedRegion>(this.url+'/regions');
   }
 }
