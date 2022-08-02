@@ -1,6 +1,8 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { Region } from '../shared/model/region';
 import { RegionService } from '../shared/services/region.service';
+import {VaccinService} from '../shared/services/vaccin.service';
+import {Vaccin} from '../shared/model/vaccin';
 
 @Component({
   selector: 'app-home',
@@ -9,14 +11,15 @@ import { RegionService } from '../shared/services/region.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  regions: Region[] = [];
+  vaccins: Vaccin[] = [];
 
-  constructor(private regionService: RegionService) { }
+  constructor(private vaccinService: VaccinService) { }
 
   ngOnInit() {
-    /*       this.regionService.getRegions().subscribe(res =>{
-            this.regions = res.docs;
-          }); */
+    this.vaccinService.getAll().subscribe((res)=> {
+      this.vaccins = res.docs;
+      console.log(this.vaccins);
+    });
   }
 
   ngOnDestroy(): void {
