@@ -45,7 +45,6 @@ export class InscriptionComponent implements OnInit {
   }
 
   inscription(){
-    console.log(this.form.valid);
   }
 
 }
