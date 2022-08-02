@@ -14,6 +14,6 @@ export class VaccinService {
   }
 
   getAll() {
-    return this.http.get<Docs<Vaccin>>(this.urlVaccin + '/10/0');
+    return this.http.get<Docs<Vaccin>>(this.urlVaccin + '/list/10/0');
   }
 }
