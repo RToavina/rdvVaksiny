@@ -21,7 +21,6 @@ export class ResponseInterceptor implements HttpInterceptor {
             icon: 'warning-outline'
           });
           toast.present();
-          return throwError(event.body.message);
         }
       }
     }));
