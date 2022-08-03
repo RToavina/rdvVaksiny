@@ -11,7 +11,7 @@
         formControlName="vaccin"
         placeholder="Veuillez choisir votre vaccin"
       >
-        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option *ngFor="let vaccin of vaccins" [value]="vaccin">{{vaccin.nomVaccin}}</ion-select-option>
       </ion-select>
     </ion-item>
 

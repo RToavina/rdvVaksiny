@@ -11,7 +11,6 @@ import {JwtDecodeService} from '../utils/jwt-decode.service';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  isConnected = false;
 
   urlBack = environment.apiJava;
   urlLogin = this.urlBack + '/utilisateur/login-utilisateur';

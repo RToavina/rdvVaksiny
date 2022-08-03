@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Vaccin} from '../shared/model/vaccin';
+import {VaccinService} from '../shared/services/vaccin.service';
 
 export function ComparePassword(
   controlName: string,
@@ -29,8 +31,9 @@ export function ComparePassword(
 export class InscriptionComponent implements OnInit {
 
   form: FormGroup;
+  vaccins: Vaccin[];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private vaccinService: VaccinService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -44,6 +47,8 @@ export class InscriptionComponent implements OnInit {
       password : ['',[Validators.required, Validators.minLength(8)]],
       passwordConfirm : ['',Validators.required]
     },{validator: ComparePassword('password','passwordConfirm')});
+
+    this.vaccinService.getAll().subscribe(res=> this.vaccins = res.docs);
   }
 
   inscription(){
