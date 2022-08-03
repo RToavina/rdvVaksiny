@@ -18,8 +18,11 @@
     <ion-content>
       <ion-list>
         <ion-item routerLink="/home">Home</ion-item>
-        <ion-item routerLink="/login">Connexion</ion-item>
         <ion-item routerLink="/inscription">Inscription</ion-item>
+        <ion-item *ngIf="!isConnected; else deco" routerLink="/login">Connexion</ion-item>
+        <ng-template #deco>
+          <ion-item (click)="logout()">Déconnexion</ion-item>
+        </ng-template>
       </ion-list>
     </ion-content>
   </ion-menu>

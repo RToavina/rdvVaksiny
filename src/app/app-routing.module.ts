@@ -5,11 +5,11 @@ import {InscriptionComponent} from './inscription/inscription.component';
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './shared/services/auth.guard';
 import {SplashComponent} from './splash/splash.component';
-import {LogedInAuthGuard} from './shared/services/loged-in-auth.guard';
+import {LoggedInAuthGuard} from './shared/services/logged-in-auth.guard';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
-  {path: 'login', component: LoginComponent, canActivate: [LogedInAuthGuard]},
+  {path: 'login', component: LoginComponent, canActivate: [LoggedInAuthGuard]},
   {path: 'inscription', component: InscriptionComponent},
   {
     path: 'splash', component: SplashComponent
