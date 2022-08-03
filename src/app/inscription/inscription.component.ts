@@ -34,18 +34,20 @@ export class InscriptionComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
+      vaccin : [null,Validators.required],
       nom : ['',Validators.required],
-      prenom :['',Validators.required],
       dateDeNaissance : ['',Validators.required],
+      sexe : [0,Validators.required],
       email : ['',[Validators.required, Validators.email]],
       telephone : ['',[Validators.required]],
+      adresse : ['',[Validators.required]],
       password : ['',[Validators.required, Validators.minLength(8)]],
       passwordConfirm : ['',Validators.required]
     },{validator: ComparePassword('password','passwordConfirm')});
   }
 
   inscription(){
-    console.log(this.form.valid);
+    console.log(this.form);
   }
 
 }
