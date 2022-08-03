@@ -28,6 +28,6 @@ export class AppComponent {
   }
 
   logout() {
-    this.logout();
+    this.authService.logout();
   }
 }
