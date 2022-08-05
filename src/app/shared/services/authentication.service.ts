@@ -34,12 +34,16 @@ export class AuthenticationService {
     const decode = this.jwtDecode.getDecodedAccessToken(response.token);
     localStorage.setItem('token', response.token);
     localStorage.setItem('auth', JSON.stringify(decode));
-    this.userService.getUser(decode?.iss).subscribe(user => this.userConnected = new Utilisateur(user));
+    this.userService.getUser(decode?.iss).subscribe(user => {
+      this.userConnected = new Utilisateur(user);
+      localStorage.setItem('user',JSON.stringify(this.userConnected));
+    });
   }
 
   logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("auth");
+    localStorage.removeItem("user");
   }
 
   getToken() {
@@ -54,7 +58,16 @@ export class AuthenticationService {
   }
 
   getUserConnected() {
+    const user = new Utilisateur(JSON.parse(localStorage.getItem("user")));
+    if(user?.idtypeutilisateur != null) {
+      return user;
+    }else {
+      const decode = this.jwtDecode.getDecodedAccessToken(localStorage.getItem("token"));
+      this.userService.getUser(decode?.iss).subscribe(u => {
+        this.userConnected = new Utilisateur(u);
+        localStorage.setItem('user',JSON.stringify(this.userConnected));
+      });
+    }
     return this.userConnected;
   }
-
 }

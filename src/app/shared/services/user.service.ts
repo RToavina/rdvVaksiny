@@ -11,7 +11,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUser(id: string) {
-    return this.http.get<Utilisateur>(this.url+'utilisateur/byid/'+id);
+    return this.http.get<Utilisateur>(this.url+'/utilisateur/byid/'+id);
   }
 
   inscriptionPatient(user: Utilisateur, infoVaccin: InfoVaccinUser) {

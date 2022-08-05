@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Vaccin} from '../shared/model/vaccin';
 import {VaccinService} from '../shared/services/vaccin.service';
+import {VaccinCentre} from '../shared/model/vaccinCentre';
 
 export function ComparePassword(
   controlName: string,
@@ -32,6 +33,7 @@ export class InscriptionComponent implements OnInit {
 
   form: FormGroup;
   vaccins: Vaccin[];
+  vaccinCentre: VaccinCentre[];
 
   constructor(private fb: FormBuilder, private vaccinService: VaccinService) { }
 
