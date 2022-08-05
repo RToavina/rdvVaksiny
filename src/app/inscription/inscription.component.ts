@@ -55,15 +55,9 @@ export class InscriptionComponent implements OnInit {
     this.vaccinService.getAll().subscribe(res => this.vaccins = res.docs);
     this.form.controls['vaccin']?.valueChanges.subscribe((value: Vaccin) => {
       this.vaccinCentre = [];
-      let hasNext = true;
-      while(hasNext) {
-        let page = 0;
-        this.vaccinodromeService.getAllVaccinodrome(value?.idVaccin,10, page).subscribe(res => {
-          this.vaccinCentre.concat(res.docs);
-          hasNext = res.hasNextPage;
-          page++;
+        this.vaccinodromeService.getAllVaccinodrome(value?.idVaccin, 10, 0).subscribe(res => {
+          res.docs.map(x => new VaccinCentre(x))?.forEach(v => this.vaccinCentre.push(v));
         });
-      }
     });
   }
 

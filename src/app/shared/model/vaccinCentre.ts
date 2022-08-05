@@ -1,4 +1,4 @@
-export interface VaccinCentre {
+export class VaccinCentre {
   idVaccinCentre: number;
   idVaccinodrome: number;
   idVaccin: number;
@@ -15,4 +15,9 @@ export interface VaccinCentre {
   telephone: string;
   adresse: string;
   imgvaccinodrome: string;
+
+  public constructor(init?: Partial<VaccinCentre>) {
+    Object.assign(this, init);
+  }
+
 }
