@@ -44,7 +44,7 @@ export class InscriptionComponent implements OnInit {
       vaccin: [null, Validators.required],
       nom: ['', Validators.required],
       dateDeNaissance: ['', Validators.required],
-      sexe: [0, Validators.required],
+      sexe: [1, Validators.required],
       email: ['', [Validators.required, Validators.email]],
       telephone: ['', [Validators.required]],
       adresse: ['', [Validators.required]],
@@ -56,12 +56,14 @@ export class InscriptionComponent implements OnInit {
     this.form.controls['vaccin']?.valueChanges.subscribe((value: Vaccin) => {
       this.vaccinCentre = [];
       let hasNext = true;
-      let page = 0;
-      this.vaccinodromeService.getAllVaccinodrome(value?.idVaccin,10, page).subscribe(res => {
-        this.vaccinCentre.concat(res.docs);
-        hasNext = res.hasNextPage;
-        page++;
-      });
+      while(hasNext) {
+        let page = 0;
+        this.vaccinodromeService.getAllVaccinodrome(value?.idVaccin,10, page).subscribe(res => {
+          this.vaccinCentre.concat(res.docs);
+          hasNext = res.hasNextPage;
+          page++;
+        });
+      }
     });
   }
 
