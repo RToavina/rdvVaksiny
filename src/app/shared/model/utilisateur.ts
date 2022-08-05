@@ -2,7 +2,7 @@ export class Utilisateur {
   idutilisateur: number;
   idtypeutilisateur: number;
   nom: string;
-  sexe: string;
+  sexe: number;
   naissance: Date;
   email: string;
   telephone: string;
@@ -10,6 +10,9 @@ export class Utilisateur {
   urlPhoto: string;
   date_ajout: Date;
   status: number;
+  public constructor(init?: Partial<Utilisateur>) {
+    Object.assign(this, init);
+  }
 }
 
 

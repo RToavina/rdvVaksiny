@@ -10,8 +10,12 @@ export class UserService {
   url = environment.apiJava;
   constructor(private http: HttpClient) { }
 
+  getUser(id: string) {
+    return this.http.get<Utilisateur>(this.url+'/utilisateur/byid/'+id);
+  }
+
   inscriptionPatient(user: Utilisateur, infoVaccin: InfoVaccinUser) {
     const data = {utilisateur: user, infoVaccinUser: infoVaccin};
-    this.http.post(this.url+ '/inscription-patient', data);
+    return this.http.post(this.url+ '/inscription-patient', data);
   }
 }

@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.vaccinService.getAll().subscribe((res)=> {
       this.vaccins = res.docs;
-      console.log(this.vaccins);
     });
   }
 

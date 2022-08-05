@@ -12,7 +12,7 @@
         placeholder="Veuillez choisir votre vaccin"
       >
         <ion-select-option *ngFor="let vaccin of vaccins" [value]="vaccin">{{
-          vaccin.nomVaccin
+          vaccin?.nomVaccin
         }}</ion-select-option>
       </ion-select>
     </ion-item>
@@ -21,10 +21,10 @@
       <ion-label position="floating">Vaccinodrome</ion-label>
       <ion-select
         interface="popover"
-        formControlName="vaccin"
+        formControlName="vaccinCentre"
         placeholder="Veuillez choisir votre vaccinodrome"
       >
-        <ion-select-option> Vaccinodrome</ion-select-option>
+        <ion-select-option *ngFor="let centre of vaccinCentre" [value]="centre"> {{centre?.nomCentre}}</ion-select-option>
       </ion-select>
     </ion-item>
 
@@ -46,12 +46,12 @@
 
         <ion-item>
           <ion-label>Homme</ion-label>
-          <ion-radio slot="start" [value]="0"></ion-radio>
+          <ion-radio slot="start" [value]="1"></ion-radio>
         </ion-item>
 
         <ion-item>
           <ion-label>Femme</ion-label>
-          <ion-radio slot="start" [value]="1"></ion-radio>
+          <ion-radio slot="start" [value]="0"></ion-radio>
         </ion-item>
       </ion-radio-group>
     </ion-list>
