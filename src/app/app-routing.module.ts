@@ -24,10 +24,12 @@ const routes: Routes = [
   {
     path: 'user-profile',
     component: UserProfileComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'user-rdv',
     component: UserRdvComponent,
+    canActivate: [AuthGuard],
   }
 ];
 

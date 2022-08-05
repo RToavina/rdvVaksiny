@@ -14,9 +14,11 @@ import {InscriptionComponent} from './inscription/inscription.component';
 import {SplashComponent} from './splash/splash.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {ResponseInterceptor} from './shared/utils/response-interceptor';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserRdvComponent } from './user-rdv/user-rdv.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, InscriptionComponent, SplashComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, InscriptionComponent, SplashComponent, UserProfileComponent,UserRdvComponent],
   imports: [BrowserModule, IonicModule.forRoot(),
     ReactiveFormsModule,
     FormsModule, AppRoutingModule, SharedModule],
