@@ -42,6 +42,7 @@ export class InscriptionComponent implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       vaccin: [null, Validators.required],
+      vaccinCentre: [null],
       nom: ['', Validators.required],
       dateDeNaissance: ['', Validators.required],
       sexe: [1, Validators.required],

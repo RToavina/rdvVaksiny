@@ -21,7 +21,7 @@
       <ion-label position="floating">Vaccinodrome</ion-label>
       <ion-select
         interface="popover"
-        formControlName="vaccin"
+        formControlName="vaccinCentre"
         placeholder="Veuillez choisir votre vaccinodrome"
       >
         <ion-select-option *ngFor="let centre of vaccinCentre" [value]="centre"> {{centre?.nomCentre}}</ion-select-option>
