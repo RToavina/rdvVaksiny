@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Vaccin} from '../shared/model/vaccin';
 import {VaccinService} from '../shared/services/vaccin.service';
 import {VaccinCentre} from '../shared/model/vaccinCentre';
+import {VaccinodromeService} from '../shared/services/vaccinodrome.service';
 
 export function ComparePassword(
   controlName: string,
@@ -17,7 +18,7 @@ export function ComparePassword(
     }
 
     if (control.value !== matchingControl.value) {
-      matchingControl.setErrors({ mustMatch: true });
+      matchingControl.setErrors({mustMatch: true});
     } else {
       matchingControl.setErrors(null);
     }
@@ -35,25 +36,36 @@ export class InscriptionComponent implements OnInit {
   vaccins: Vaccin[];
   vaccinCentre: VaccinCentre[];
 
-  constructor(private fb: FormBuilder, private vaccinService: VaccinService) { }
+  constructor(private fb: FormBuilder, private vaccinService: VaccinService, private vaccinodromeService: VaccinodromeService) {
+  }
 
   ngOnInit() {
     this.form = this.fb.group({
-      vaccin : [null,Validators.required],
-      nom : ['',Validators.required],
-      dateDeNaissance : ['',Validators.required],
-      sexe : [0,Validators.required],
-      email : ['',[Validators.required, Validators.email]],
-      telephone : ['',[Validators.required]],
-      adresse : ['',[Validators.required]],
-      password : ['',[Validators.required, Validators.minLength(8)]],
-      passwordConfirm : ['',Validators.required]
-    },{validator: ComparePassword('password','passwordConfirm')});
+      vaccin: [null, Validators.required],
+      nom: ['', Validators.required],
+      dateDeNaissance: ['', Validators.required],
+      sexe: [0, Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      telephone: ['', [Validators.required]],
+      adresse: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      passwordConfirm: ['', Validators.required]
+    }, {validator: ComparePassword('password', 'passwordConfirm')});
 
-    this.vaccinService.getAll().subscribe(res=> this.vaccins = res.docs);
+    this.vaccinService.getAll().subscribe(res => this.vaccins = res.docs);
+    this.form.controls['vaccin']?.valueChanges.subscribe((value: Vaccin) => {
+      this.vaccinCentre = [];
+      let hasNext = true;
+      let page = 0;
+      this.vaccinodromeService.getAllVaccinodrome(value?.idVaccin,10, page).subscribe(res => {
+        this.vaccinCentre.concat(res.docs);
+        hasNext = res.hasNextPage;
+        page++;
+      });
+    });
   }
 
-  inscription(){
+  inscription() {
     console.log(this.form);
   }
 
