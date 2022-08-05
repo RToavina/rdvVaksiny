@@ -6,6 +6,9 @@ import {tap} from 'rxjs/operators';
 import {Response} from '../model/response';
 import {Auth} from '../model/user';
 import {JwtDecodeService} from '../utils/jwt-decode.service';
+import {UserService} from './user.service';
+import {Utilisateur} from '../model/utilisateur';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +17,9 @@ export class AuthenticationService {
 
   urlBack = environment.apiJava;
   urlLogin = this.urlBack + '/utilisateur/login-utilisateur';
+  private userConnected: Utilisateur;
 
-  constructor(private http: HttpClient, private jwtDecode: JwtDecodeService) {
+  constructor(private http: HttpClient, private jwtDecode: JwtDecodeService, private userService: UserService) {
   }
 
   login(login: Login) {
@@ -27,8 +31,10 @@ export class AuthenticationService {
   }
 
   private setSession(response: Response) {
+    const decode = this.jwtDecode.getDecodedAccessToken(response.token);
     localStorage.setItem('token', response.token);
-    localStorage.setItem('auth', JSON.stringify(this.jwtDecode.getDecodedAccessToken(response.token)));
+    localStorage.setItem('auth', JSON.stringify(decode));
+    this.userService.getUser(decode?.iss).subscribe(user => this.userConnected = new Utilisateur(user));
   }
 
   logout() {
@@ -45,6 +51,10 @@ export class AuthenticationService {
     const info = new Auth(JSON.parse(auth));
     const now = new Date();
     return now.getTime() < (new Date(info.expiration)).getTime();
+  }
+
+  getUserConnected() {
+    return this.userConnected;
   }
 
 }
