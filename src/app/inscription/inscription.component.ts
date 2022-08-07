@@ -87,15 +87,14 @@ export class InscriptionComponent implements OnInit {
   }
 
   inscription() {
+    if (this.form.valid) {
       this.userService.inscriptionPatient(this.getUser(),this.getInfoVaccin()).subscribe(res => {
         console.log(res);
         if (res?.status === 200) {
           this.router.navigateByUrl('/login');
         }
       });
-
-    console.log(this.getInfoVaccin());
-    console.log(this.getUser());
+    }
   }
 
 }
