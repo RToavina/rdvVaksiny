@@ -73,7 +73,7 @@ export class InscriptionComponent implements OnInit {
       telephone: this.form.get('telephone').value,
       email: this.form.get('email').value,
       mot_de_passe: this.form.get('password').value,
-      status: 100
+      urlPhoto:'assets/img/profile-pic.png',
     });
   }
 
@@ -83,7 +83,6 @@ export class InscriptionComponent implements OnInit {
       idVaccin: this.form.get('vaccin').value?.idVaccin,
       idVaccinCentre: vaccinCentreForm?.value?.idVaccinCentre,
       idVaccinodrome: vaccinCentreForm?.value?.idVaccinodrome,
-      status: vaccinCentreForm?.value?.status
     });
   }
 
@@ -94,6 +93,9 @@ export class InscriptionComponent implements OnInit {
           this.router.navigateByUrl('/login');
         }
       });
+
+    console.log(this.getInfoVaccin());
+    console.log(this.getUser());
   }
 
 }

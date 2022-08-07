@@ -23,6 +23,6 @@ export class UserService {
       })
     };
     const data = {utilisateur: user, infoVaccinUser: infoVaccin};
-    return this.http.post<Response>(this.url+ '/inscription-patient', data, optionRequete);
+    return this.http.post<Response>(this.url+ '/utilisateur/inscription-patient', data, optionRequete);
   }
 }
