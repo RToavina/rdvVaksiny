@@ -23,4 +23,7 @@ export class InfoVaccinUser {
   idVaccinodrome: number;
   idVaccin: number;
   status: number;
+  public constructor(init?: Partial<InfoVaccinUser>) {
+    Object.assign(this, init);
+  }
 }

@@ -4,6 +4,9 @@ import {Vaccin} from '../shared/model/vaccin';
 import {VaccinService} from '../shared/services/vaccin.service';
 import {VaccinCentre} from '../shared/model/vaccinCentre';
 import {VaccinodromeService} from '../shared/services/vaccinodrome.service';
+import {InfoVaccinUser, Utilisateur} from '../shared/model/utilisateur';
+import {UserService} from '../shared/services/user.service';
+import {Router} from '@angular/router';
 
 export function ComparePassword(
   controlName: string,
@@ -36,7 +39,8 @@ export class InscriptionComponent implements OnInit {
   vaccins: Vaccin[];
   vaccinCentre: VaccinCentre[];
 
-  constructor(private fb: FormBuilder, private vaccinService: VaccinService, private vaccinodromeService: VaccinodromeService) {
+  constructor(private fb: FormBuilder, private vaccinService: VaccinService, private vaccinodromeService: VaccinodromeService,
+              private userService: UserService, private router: Router) {
   }
 
   ngOnInit() {
@@ -48,7 +52,6 @@ export class InscriptionComponent implements OnInit {
       sexe: [1, Validators.required],
       email: ['', [Validators.required, Validators.email]],
       telephone: ['', [Validators.required]],
-      adresse: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       passwordConfirm: ['', Validators.required]
     }, {validator: ComparePassword('password', 'passwordConfirm')});
@@ -62,8 +65,35 @@ export class InscriptionComponent implements OnInit {
     });
   }
 
+  getUser() {
+    return new Utilisateur({
+      nom: this.form.get('nom').value,
+      naissance: this.form.get('dateDeNaissance').value,
+      sexe: this.form.get('sexe').value,
+      telephone: this.form.get('telephone').value,
+      email: this.form.get('email').value,
+      mot_de_passe: this.form.get('password').value,
+      status: 100
+    });
+  }
+
+  getInfoVaccin() {
+    const vaccinCentreForm = this.form.get('vaccinCentre');
+    return new InfoVaccinUser({
+      idVaccin: this.form.get('vaccin').value?.idVaccin,
+      idVaccinCentre: vaccinCentreForm?.value?.idVaccinCentre,
+      idVaccinodrome: vaccinCentreForm?.value?.idVaccinodrome,
+      status: vaccinCentreForm?.value?.status
+    });
+  }
+
   inscription() {
-    console.log(this.form);
+      this.userService.inscriptionPatient(this.getUser(),this.getInfoVaccin()).subscribe(res => {
+        console.log(res);
+        if (res?.status === 200) {
+          this.router.navigateByUrl('/login');
+        }
+      });
   }
 
 }
